@@ -1,0 +1,93 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Nouvelle chambre</h1>
+    <form method="post">
+    <input type="hidden" value="{{ guestroom.id }}" name="id">
+    
+     <div class="row form-switch mb-3 ms-0">
+        <input type="checkbox" class="form-check-input" role="switch" name="disabled" id="disabled" >
+        <label for="disabled" class="form-check-label">Chambre disponible</label>
+    </div>
+    <div class="row mb-3">
+        <label for="title" class="col-sm-2 col-form-label">Titre: </label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="title" id="title" required>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="description" class="col-sm-2 col-form-label">Description: </label>
+        <div class="col-sm-10">
+            <textarea class="form-control" name="description" id="description" rows="10" required></textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="max_persons" class="col-sm-2 col-form-label">Max. de personne: </label>
+        <div class="col-sm-10">
+            <input type="number" min="1" max="20" class="form-control" name="max_persons" id="max_persons" required>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="num_bed" class="col-sm-2 col-form-label">Nombre de lit: </label>
+        <div class="col-sm-10">
+            <input type="number" min="1" max="10" class="form-control" name="num_bed" id="num_bed" required>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="add_bed" class="col-sm-2 col-form-label">Lit supplémentaire: </label>
+        <div class="col-sm-10">
+            <input type="number" min="0" max="10" class="form-control" name="add_bed" id="add_bed" required>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label for="area" class="col-sm-2 col-form-label">Superficie: </label>
+        <div class="col-sm-10">
+            <input type="number" min="1" class="form-control" name="area" id="area" >
+        </div>
+    </div>
+
+    <fieldset class="row mb-3">
+        <legend class="col-form-label col-sm-2 pt-0">Options:</legend>
+        <div class="col-sm-10">
+
+            <div class="row form-switch">
+                <input type="checkbox" class="form-check-input" role="switch" name="wifi" id="wifi" >
+                <label for="wifi" class="form-check-label">Wifi</label>
+            </div>
+            <div class="row form-switch">
+                <input type="checkbox" class="form-check-input" role="switch" name="tv" id="tv" >
+                <label for="tv" class="form-check-label">Télévision</label>
+            </div>
+            <div class="row form-switch">
+                <input type="checkbox" class="form-check-input" role="switch" name="clim" id="clim" >
+                <label for="clim" class="form-check-label">Climatisation</label>
+            </div>
+            <div class="row form-switch">
+                <input type="checkbox" class="form-check-input" role="switch" name="pets" id="pets" >
+                <label for="pets" class="form-check-label">Animal acccepté</label>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="row mb-3">
+        <div class="row mb-3">
+            <label for="price" class="col-sm-2 col-form-label">Prix: </label>
+            <div class="col-sm-10">
+                <input type="number" min="0" class="form-control" name="price" id="price" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="promotion" class="col-sm-2 col-form-label">Promotion %: </label>
+            <div class="col-sm-10">
+                <input type="number" min="0" max="100" step="5" class="form-control" name="promotion" id="promotion">
+            </div>
+        </div>
+
+    </fieldset>
+
+    
+    
+    <input type="submit" class="btn btn-primary mt-3" value="Enregistrer">
+</form>
+<a href="/guestroom" class="btn btn-primary mt-3">Retour à la liste</a></form>
+{% endblock %}

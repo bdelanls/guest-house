@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Guestroom {{ guestroom.title }}</h1>
+     <ul class="list-group list-group-flush mt-5">
+        <li class="list-group-item">Diponible : {{ guestroom.disabled }}</li>
+        <li class="list-group-item">Titre : {{ guestroom.title }}</li>
+        <li class="list-group-item">Description : {{ guestroom.description }}</li>
+        <li class="list-group-item">Maximum de personne : {{ guestroom.max_persons }}</li>
+        <li class="list-group-item">Nombre de lit : {{ guestroom.num_bed }}</li>
+        <li class="list-group-item">Lit supplémentaire : {{ guestroom.add_bed }}</li>
+        <li class="list-group-item">Superficie : {{ guestroom.area }} m<sup>2</sup></li>
+        <li class="list-group-item">Wifi : {{ guestroom.wifi }}</li>
+        <li class="list-group-item">Télévision : {{ guestroom.tv }}</li>
+        <li class="list-group-item">Climatisation : {{ guestroom.clim }}</li>
+        <li class="list-group-item">Animaux acceptés : {{ guestroom.pets }}</li>
+        <li class="list-group-item">Prix : {{ guestroom.price }} €</li>
+        <li class="list-group-item">Promotion : {{ guestroom.promotion }} %</li>
+    </ul>
+
+    <a href="/guestroom/edit/{{ guestroom.id }}" class="btn btn-primary mt-5">Editer</a>
+    <a data-bs-toggle="modal" data-bs-target="#suppModal" class="btn btn-danger mt-5">Supprimer</a>
+    <br>
+    <a href="/guestroom" class="btn btn-primary mt-5">Retour à la liste</a>
+
+
+<div class="modal fade" id="suppModal" tabindex="-1" aria-labelledby="suppModalLabel" aria-hidden="true">  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer la chambre</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sur de vouloir supprimer la chambre ?
+        <br>Vous pouvez également la désactiver !
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a href="/guestroom/delete/{{guestroom.id}}" class="btn btn-danger">Supprimer définitivement</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
