@@ -24,7 +24,8 @@ DROP TABLE IF EXISTS `guest_house`.`guestroom` ;
 
 CREATE TABLE IF NOT EXISTS `guest_house`.`guestroom` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `description` VARCHAR(255) NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `description` LONGTEXT NOT NULL,
   `max_persons` SMALLINT NOT NULL,
   `num_bed` SMALLINT NOT NULL DEFAULT 1,
   `add_bed` SMALLINT NOT NULL,
