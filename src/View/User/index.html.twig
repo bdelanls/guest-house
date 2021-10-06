@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Utilisateurs</h1>
+
+    <table class="table table-hover mt-5">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Role</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+        <tr class="table">
+            <td>{{ user.id }}</td>
+            <td>{{ user.firstname }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.role_name }}</td>
+            <td>
+                <a href="/user/show/{{ user.id }}" class="btn btn-primary">Montrer</a>
+                <a href="/user/edit/{{ user.id }}" class="btn btn-warning">Editer</a>
+            </td>
+        </tr>    
+        {% else %}
+        <tr>
+            <td>Rien à afficher</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <a href="/user/add" class="btn btn-primary">Ajouter un utilisateur</a>
+{% endblock %}
