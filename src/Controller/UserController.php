@@ -118,11 +118,9 @@ class UserController extends AbstractController
             $userUpdate['firstname'] = $_POST['firstname'];
             $userUpdate['lastname'] = $_POST['lastname'];
             $userUpdate['login'] = $_POST['login'];
-            if (isset($_POST['password'])){
-                //$passwordHash = password_hash($_POST['password'], PASSWORD_ARGON2ID);
-                $userUpdate['password'] = $_POST['password'];
-            }else{
-                $userUpdate['password'] = "coucou";
+            if ($_POST['password'] != ""){
+                $passwordHash = password_hash($_POST['password'], PASSWORD_ARGON2ID);
+                $userUpdate['password'] = $passwordHash;
             }
             $userUpdate['email'] = $_POST['email'];
             $userUpdate['phone'] = $_POST['phone'];
@@ -139,9 +137,8 @@ class UserController extends AbstractController
                   L\'email existe déjà !
                 </div>';
             }else {
-                //$userManager->update($userUpdate);
-                //header('Location:/user/show/' . $id);
-                var_dump($userUpdate);
+                $userManager->update($userUpdate);
+                header('Location:/user/show/' . $id);
             }
             
         }

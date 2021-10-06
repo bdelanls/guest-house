@@ -80,7 +80,7 @@ class UserManager extends AbstractManager
 
         // prepared request
 
-        if ($user['password'] != ""){
+        if (isset($user['password'])){
             $sql = "UPDATE " . self::TABLE . " SET 
             `firstname` = :firstname, 
             `lastname` = :lastname,
@@ -105,7 +105,11 @@ class UserManager extends AbstractManager
         $statement->bindValue(':firstname', $user['firstname'], \PDO::PARAM_STR);
         $statement->bindValue(':lastname', $user['lastname'], \PDO::PARAM_STR);
         $statement->bindValue(':login', $user['login'], \PDO::PARAM_STR);
-        $statement->bindValue(':password', $user['password'], \PDO::PARAM_STR);
+        
+        if (isset($user['password'])){
+            $statement->bindValue(':password', $user['password'], \PDO::PARAM_STR);
+        }
+        
         $statement->bindValue(':email', $user['email'], \PDO::PARAM_STR);
         $statement->bindValue(':phone', $user['phone'], \PDO::PARAM_STR);
 
