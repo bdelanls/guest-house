@@ -170,7 +170,7 @@ DROP TABLE IF EXISTS `guest_house`.`media` ;
 
 CREATE TABLE IF NOT EXISTS `guest_house`.`media` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(45) NOT NULL,
+  `file` VARCHAR(100) NOT NULL,
   `title` VARCHAR(255) NULL,
   `featured` TINYINT(1) NULL,
   `guestroom_id` INT NOT NULL,
