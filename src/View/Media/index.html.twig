@@ -1,0 +1,38 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Photos</h1>
+    <table class="table table-hover mt-5">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Chambre</th>
+                <th>Mise en avant</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for media in medias %}
+        <tr class="table">
+            <td>{{ media.title }}</td>
+            <td>{{ media.guestroom_id }}</td>
+            <td>{{ media.featured }}</td>
+            <td>
+                <a href="/media/show/{{ media.id }}" class="btn btn-primary">Montrer</a>
+                <a href="/media/edit/{{ media.id }}" class="btn btn-warning">Editer</a>
+            </td>
+        </tr>    
+        {% else %}
+        <tr>
+            <td>Rien à afficher</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <a href="/media/add" class="btn btn-primary">Ajouter une photo</a>    
+    
+    
+ {% endblock %}

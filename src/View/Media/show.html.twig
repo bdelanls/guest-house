@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>{{ media.title }}</h1>
+    
+    <div>
+    <img src="/assets/images/{{ media.file }}">
+    </div>
+    <ul class="list-group list-group-flush mt-5">
+        <li  class="list-group-item">Titre : {{ media.title }}</li>
+        <li  class="list-group-item">Nom du fichier : {{ media.file }}</li>
+        <li  class="list-group-item">Mise en avant : {{ media.featured}}
+        <li  class="list-group-item">Chambre : {{ media.guestroom_id }}</li>
+    </ul>
+
+
+
+
+
+    <a href="/media/edit/{{ media.id }}" class="btn btn-primary mt-5">Editer</a>
+    <a href="/media/add/" class="btn btn-primary mt-5">Ajouter des photos</a>
+    <a data-bs-toggle="modal" data-bs-target="#suppModal" class="btn btn-danger mt-5">Supprimer</a>
+    <br>
+    <a href="/media" class="btn btn-primary mt-5">Retour à la liste des photos</a>
+
+
+<div class="modal fade" id="suppModal" tabindex="-1" aria-labelledby="suppModalLabel" aria-hidden="true">  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer la photo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sur de vouloir supprimer la photo ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="/media/delete/{{guestroom.id}}" class="btn btn-danger">Supprimer définitivement</a>
+      </div>
+    </div>
+  </div>
+</div>{% endblock %}

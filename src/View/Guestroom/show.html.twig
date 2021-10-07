@@ -19,6 +19,7 @@
     </ul>
 
     <a href="/guestroom/edit/{{ guestroom.id }}" class="btn btn-primary mt-5">Editer</a>
+    <a href="/media/add/{{ guestroom.id }}" class="btn btn-primary mt-5">Ajouter des photos</a>
     <a data-bs-toggle="modal" data-bs-target="#suppModal" class="btn btn-danger mt-5">Supprimer</a>
     <br>
     <a href="/guestroom" class="btn btn-primary mt-5">Retour à la liste</a>
@@ -35,7 +36,7 @@
         <br>Vous pouvez également la désactiver !
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
         <a href="/guestroom/delete/{{guestroom.id}}" class="btn btn-danger">Supprimer définitivement</a>
       </div>
     </div>
