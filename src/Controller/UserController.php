@@ -58,7 +58,22 @@ class UserController extends AbstractController
                 return $this->twig->render('User/show.html.twig', ['user' => $log]);
             }
         }
-       return $this->twig->render('User/login.html.twig');
+
+        if (isset($_SESSION["user"])){
+            $role = $_SESSION["user"]["role"];
+
+            if ($role == 1){
+                $roleName = "Admin";
+            }else if ($role == 2){
+                $roleName = "Client";
+            }
+        }else{
+            $roleName = "";
+        }
+       
+        
+        
+        return $this->twig->render('User/login.html.twig', ['role' => $roleName]);
         
     }
 
