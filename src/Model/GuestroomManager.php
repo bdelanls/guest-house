@@ -106,4 +106,16 @@ class GuestroomManager extends AbstractManager
 
         return $statement->execute();
     }
+
+    /**
+     * Get guestroom for global.
+     *
+     * @return array
+     */
+    public function selectAllGlobal(): array
+    {
+        return $this->pdo->query('SELECT `id`, `title` FROM ' . $this->table)->fetchAll();
+    }
+
+
 }

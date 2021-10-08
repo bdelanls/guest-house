@@ -29,10 +29,21 @@
         <label for="phone" class="form-label mt-2">Téléphone : </label>
         <input type="text" class="form-control" name="phone" id="phone" required>
     </div>
-
+    {% if appUser.role == 1 %}
+    <div class="form-group mt-3">
+        <label for="role_id" class="form-label mt-2">Role : </label>
+        <select class="form-select" name="role_id" id="role_id" required>
+            <option value="">-- Choisissez un role --</option>
+            <option value="1">Admin</option>
+            <option value="2">Client</option>
+        </select>
+    </div>
+    {% endif %}
     
-    
-    <input type="submit" class="btn btn-primary mt-3" value="Enregistrer">
+    <input type="submit" class="btn btn-primary mt-5" value="Enregistrer">
 </form>
+{% if appUser.role == 1 %}
 <a href="/user" class="btn btn-primary mt-3">Retour à la liste</a>
+{% endif %}
+
 {% endblock %}

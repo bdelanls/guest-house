@@ -153,4 +153,6 @@ class GuestroomController extends AbstractController
         $guestroomManager->delete($id);
         header('Location:/guestroom/index');
     }
+
+
 }
