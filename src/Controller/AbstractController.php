@@ -6,6 +6,8 @@ use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 
+use App\Model\GuestroomManager;
+
 
 abstract class AbstractController
 {
@@ -34,8 +36,11 @@ abstract class AbstractController
             $this->twig->addGlobal("appUser", $_SESSION["user"]);
         }
 
-       
+        $appGuestrooms=[];
+        $guestroomList = new GuestroomManager();
+        $appGuestrooms = $guestroomList->selectAllGlobal();
         
+        $this->twig->addGlobal("appGuestrooms", $appGuestrooms);
 
 
 
