@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" href="#">LOGO</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Maison d'hôtes</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Chambres d'hôtes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for appGuestroom in appGuestrooms %}
+            <li><a class="dropdown-item" href="/guestroom/show/{{ appGuestroom.id }}">{{ appGuestroom.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">contact</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+
+
+      {% if appUser.role == 1 %}
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarCompte" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user"></i></a>
+            <ul class="dropdown-menu" aria-labelledby="navbarCompte">
+              <li><a class="dropdown-item" href="/user/show/{{ appUser.id }}">Mon compte</a></li>
+              <li><a class="dropdown-item" href="/user">Liste des utilisateurs</a></li>
+              <li><a class="dropdown-item" href="/guestroom">Liste des chambres</a></li>
+              <li><a class="dropdown-item" href="/media">Liste des photos</a></li>
+              <li><a class="dropdown-item" href="/">Liste des réservations</a></li>
+            </ul>
+          </li>
+      </ul>
+      {% elseif appUser.role == 2 %}
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarCompte" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user"></i></a>
+            <ul class="dropdown-menu" aria-labelledby="navbarCompte">
+              <li><a class="dropdown-item" href="/user/show/{{ appUser.id }}">Mon compte</a></li>
+              <li><a class="dropdown-item" href="#">Mes réservations</a></li>
+            </ul>
+          </li>
+      </ul>
+      {% endif %}
+        
+        
+        {% if appUser is defined %}
+        <a href="/user/logout" class="btn btn-danger">Déconnexion</a>
+        {% else %}
+        <a href="/user/login" class="btn btn-success">Connexion</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>

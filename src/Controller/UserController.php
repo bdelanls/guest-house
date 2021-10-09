@@ -37,6 +37,7 @@ class UserController extends AbstractController
             if ($log){
                 if( password_verify($user['password'], $log['password']) ) {
                     $_SESSION["user"] = [
+                        "id" => $log["id"],
                         "firstname" => $log["firstname"],
                         "lastname" => $log['lastname'],
                         "login" => $log['login'],
@@ -51,30 +52,27 @@ class UserController extends AbstractController
             }
 
             if($alert){
-                echo '<div class="alert alert-danger" role="alert">
-                  Le login et/ou le mot de passe n\'est pas bon.
-                </div>';
+                return $this->twig->render('User/login.html.twig', ['connect' => false]);
             }else{
-                return $this->twig->render('User/show.html.twig', ['user' => $log]);
+                return $this->twig->render('User/login.html.twig', ['connect' => true, 'log' => $log]);
             }
         }
+        
+        return $this->twig->render('User/login.html.twig');
+        
+    }
+    
+    /**
+     * Method logout
+     *
+     * @return void
+     */
+    public function logout()
+    {
+        unset($_SESSION["user"]);
+        //return $this->twig->render('login.html.twig', ['connect' => "out"]);
+        header('Location:/');
 
-        if (isset($_SESSION["user"])){
-            $role = $_SESSION["user"]["role"];
-
-            if ($role == 1){
-                $roleName = "Admin";
-            }else if ($role == 2){
-                $roleName = "Client";
-            }
-        }else{
-            $roleName = "";
-        }
-       
-        
-        
-        return $this->twig->render('User/login.html.twig', ['role' => $roleName]);
-        
     }
 
 
@@ -92,7 +90,12 @@ class UserController extends AbstractController
         // $users = $userManager->selectAll();
         $users = $userManager->allWithRole();
 
-        return $this->twig->render('User/index.html.twig', ['users' => $users]);
+        if ($_SESSION["user"]["role"] == 1){
+            return $this->twig->render('User/index.html.twig', ['users' => $users]);
+        }else{
+            header('Location:/');
+        }
+        
     }
 
 
@@ -208,12 +211,31 @@ class UserController extends AbstractController
                 </div>';
             }else {
                 $id = $userManager->insert($user);
+
+                $_SESSION["user"] = [
+                    "id" => $user["id"],
+                    "firstname" => $user["firstname"],
+                    "lastname" => $user['lastname'],
+                    "login" => $user['login'],
+                    "email" => $user["email"],
+                    "role" => $user["role_id"],
+                ];
+
                 header('Location:/user/show/' . $id);
             }
 
         }
 
-        return $this->twig->render('User/add.html.twig');
+        if (isset($_SESSION["user"]["role"])){
+            if ($_SESSION["user"]["role"] != 2){
+                return $this->twig->render('User/add.html.twig');
+            }else{
+                header('Location:/');
+            }
+        }else{
+            return $this->twig->render('User/add.html.twig');
+        }
+        
     }
 
 
@@ -228,4 +250,6 @@ class UserController extends AbstractController
         $userManager->delete($id);
         header('Location:/user/index');
     }
+
+    
 }
