@@ -194,17 +194,12 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- Table `guest_house`.`contact`
 -- -----------------------------------------------------
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-
-DROP TABLE IF EXISTS `contact`;
-CREATE TABLE IF NOT EXISTS `contact` (
+CREATE TABLE `contact` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `subject` varchar(200) NOT NULL,
-  `message` varchar(500) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `subject` varchar(255) NOT NULL,
+  `message` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
