@@ -114,8 +114,18 @@ class GuestroomManager extends AbstractManager
      */
     public function selectAllGlobal(): array
     {
-        return $this->pdo->query('SELECT `id`, `title` FROM ' . $this->table)->fetchAll();
+        return $this->pdo->query('SELECT `id`, `title`, `price` FROM ' . $this->table)->fetchAll();
     }
 
 
+    public function selectAllHome(): array
+    {
+        $sql = "SELECT * FROM " . $this->table . " WHERE disabled='1' " ;
+        return $this->pdo->query($sql)->fetchAll();
+    }
+
+
+
 }
+
+

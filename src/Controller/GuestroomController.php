@@ -4,6 +4,11 @@ namespace App\Controller;
 
 use App\Model\GuestroomManager;
 
+use App\Model\BookingManager;
+use App\Model\UserManager;
+use App\Model\RestorationManager;
+use App\Model\MediaManager;
+
 /**
  * Class GuestroomController
  *
@@ -43,13 +48,17 @@ class GuestroomController extends AbstractController
         $guestroomManager = new GuestroomManager();
         $guestroom = $guestroomManager->selectOneById($id);
 
+        $mediaManager = new MediaManager();
+        $media = $mediaManager->selectOneByGuestroom($id);
+        $photos = $mediaManager->selectAllPhoto($id);
+
         $guestroom['disabled'] = $guestroom['disabled'] == true ? "Oui" : "Non";
         $guestroom['wifi'] = $guestroom['wifi'] == true ? "Oui" : "Non";
         $guestroom['tv'] = $guestroom['tv'] == true ? "Oui" : "Non";
         $guestroom['clim'] = $guestroom['clim'] == true ? "Oui" : "Non";
         $guestroom['pets'] = $guestroom['pets'] == true ? "Oui" : "Non";
 
-        return $this->twig->render('Guestroom/show.html.twig', ['guestroom' => $guestroom]);
+        return $this->twig->render('Guestroom/show.html.twig', ['guestroom' => $guestroom, 'photos' => $photos]);
     }
 
 
@@ -154,9 +163,88 @@ class GuestroomController extends AbstractController
         header('Location:/guestroom/index');
     }
 
-
-
     
+    
+    public function booking(int $id)
+    {
+        $guestroomManager = new GuestroomManager();
+        $guestroom = $guestroomManager->selectOneById($id);
 
+        $mediaManager = new MediaManager();
+        $media = $mediaManager->selectOneByGuestroom($id);
+        $photos = $mediaManager->selectAllPhoto($id);
+
+        $restorationManager = new RestorationManager();
+        $restorations = $restorationManager->selectAll();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $arrival = $_POST['arrival'];
+            $departure = $_POST['departure'];
+
+            $guestroomId = $_POST['guestroom_id'];
+
+            $bookingManager = new BookingManager();
+            $bookingDates = $bookingManager->selectAllCross($guestroomId);
+
+            $result = 0;
+
+            $today = date("Y-m-d");
+
+            foreach($bookingDates as $bookingDate){
+
+                if (($arrival < $bookingDate['arrival']) && ($departure > $bookingDate['arrival']) && ($departure < $bookingDate['departure'])){
+                    $result = 1;
+                } else if (($arrival < $bookingDate['arrival']) && ($departure > $bookingDate['departure'])){
+                    $resut = 1;
+                } else if (($arrival > $bookingDate['arrival']) && ($arrival < $bookingDate['departure']) && ($departure > $bookingDate['departure'])){
+                    $result = 1;
+                } else if (($arrival >= $bookingDate['arrival']) && ($arrival < $bookingDate['departure']) && ($departure <= $bookingDate['departure'])){
+                    $result = 1;
+                } else if ($arrival <= $today || $departure <= $today || $departure <= $arrival){
+                    $result = 2;
+                }
+            }
+
+            /* Enregistrement de la réservation */
+            if (!$result){
+                !isset($_POST['taxi']) ? $taxi = false : $taxi = true;
+
+                $bookingManager = new BookingManager();
+                $booking = [
+                    'user_id' => $_POST['user_id'],
+                    'guestroom_id' => $_POST['guestroom_id'],
+                    'arrival' => $_POST['arrival'],
+                    'departure' => $_POST['departure'],
+                    'num_of_persons' => $_POST['num_of_persons'],
+                    'taxi' => $taxi,
+                    'restoration_id' => $_POST['restoration_id'],
+                ];
+                $id = $bookingManager->insert($booking);
+            }
+
+
+            
+
+            return $this->twig->render('Guestroom/booking.html.twig', [
+                'guestroom' => $guestroom, 
+                'media' => $media, 
+                'photos' => $photos, 
+                'restorations' => $restorations,
+                'messageReservation' => $result,
+            ]);
+
+            
+
+        }
+
+
+        return $this->twig->render('Guestroom/booking.html.twig', [
+                'guestroom' => $guestroom, 
+                'media' => $media, 
+                'photos' => $photos, 
+                'restorations' => $restorations
+            ]);
+    }
 
 }

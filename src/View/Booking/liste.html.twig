@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Réservations</h1>
+
+    <table class="table table-hover mt-5">
+        <thead>
+            <tr>    
+                <th>Validé</th>
+                <th>Chambre</th>
+                <th>Réservé par</th>
+                <th>Date d'arrivée</th>
+                <th>Date de départ</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+        <tr class="table">
+            <td>{{ booking.disabled ? '<i class="fas fa-check"></i>' : '•' }}</td>
+            <td>{{ guestrooms[booking.guestroom_id -1].title }}</td>
+            <td>{{ users[booking.user_id -1].lastname }}</td>
+            <td>{{ booking.arrival }}</td>
+            <td>{{ booking.departure }}</td>
+            <td>
+                <a href="/booking/show/{{ booking.id }}" class="btn btn-primary">Montrer</a>
+                <a href="/booking/edit/{{ booking.id }}" class="btn btn-primary">Editer</a>
+            </td>
+        </tr>    
+        {% else %}
+        <tr>
+            <td>Rien à afficher</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    <a href="/booking/add" class="btn btn-primary">Ajouter une réservation</a>
+
+<div class="modal fade" id="suppModal" tabindex="-1" aria-labelledby="suppModalLabel" aria-hidden="true">  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer la réservation de {{ booking.firstname }} {{ booking.lastname }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sur de vouloir supprimer la réservation ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="/booking/delete/{{booking.id}}" class="btn btn-danger">Supprimer définitivement</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

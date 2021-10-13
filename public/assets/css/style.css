@@ -9,3 +9,63 @@ body{height: 100vh; display: flex; flex-direction: column;}
     padding: 15px;
     margin: auto;
 }
+
+.bg-parallax {
+    background-image: url("../images/maison-hotes.jpg");
+    /* background-attachment: fixed; */
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img-intro{
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    min-height: 400px;
+}
+.overlay{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 125%;
+    bottom: 0;
+    z-index: -1;
+}
+
+.img-intro h1{text-shadow: -2px 2px 2px rgba(0, 0, 0, 0.8);}
+.list-guestroom a {text-decoration: none;}
+.list-guestroom h4 {color:#666; font-weight: bold; text-transform: uppercase; margin:0;}
+
+img{width: 100%;}
+
+.img_guestroom{
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 190px;
+    background-color: #ccc;
+    margin-bottom: 10px;
+}
+.img_guestroom a{
+    position: absolute;
+    right: 33%;
+    bottom: 12px;
+}
+
+/** guestroom **/
+.guestroom-header{
+    height: 400px; overflow: hidden; 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.guestroom-header h1{font-size: 5em; font-weight: 900; color: #fff;}
+.guestroom-header .list-group-item{background-color: unset;}
+.guestroom-header ul{background-color: rgba(255, 255, 255, 0.7);}
+
+.cartouche{background-color: rgb(255, 187, 0); padding: 1em; }
+.cartouche h4{font-size: 4rem; font-weight: 900; color: #fff;}
+.cartouche h4 span{font-size: 2rem; font-weight: 400;}
+.description{line-height: 160%; color:#333;}

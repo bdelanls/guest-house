@@ -1,0 +1,64 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1 class="mt-4 mb-2">Contact</h1>
+
+     
+
+
+    <div class="row align-items-start">
+
+        <div class="col">
+            {% if message is defined %}
+            <div class="alert alert-success" role="alert">
+                Merci {{ nameContact }}, votre message a bien été envoyé. <br>
+                Nous vous répondrons dans les plus brefs délais.
+            </div>
+            {% endif %}
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis possimus totam reiciendis, laborum sequi
+quae laudantium magni modi architecto necessitatibus cupiditate est ipsum commodi minus deleniti quod maiores
+temporibus.
+        </div>
+
+        <form method="POST" class="col">
+                
+            <div class="col-md-12">
+                <label for="name" class="form-label">Votre nom*</label> <br> 
+                <input class="form-control" type="text" name="name" id="name"  placeholder="Nom complet" required><br>
+            </div>
+            
+            <div class="col-md-12">
+                <label for="email" class="form-label">Votre e-mail*</label> <br> 
+                <input class="form-control" type="email" name="email" id="email" placeholder="adresse@exemple.com" required><br>
+            </div>
+            <div class="col-md-12">
+                <label for="subject" class="form-label">Sujet</label><br/>
+                    <select name="subject" id="subject" class="form-select" >  
+                            <option value="" selected>Choix...</option>  
+                            <option value="text">Sujestion</option>
+                            <option value="error">Reporter erreur</option>
+                            <option value="others">Autres</option>
+                    </select><br>
+            </div>
+            <div class="col-md-12">
+                <label class="form-label" for="message">Message :</label><br />
+                <textarea class="form-control"  name="message" id="message" rows="5"></textarea>    
+            </div><br>
+            
+            <div class="col-md-12 ">
+                <input type="submit" value="Envoyer" class="btn btn-primary"/>	
+            </div>
+            
+
+        </form>
+
+    </div>
+
+
+
+
+    
+
+
+
+{% endblock %}

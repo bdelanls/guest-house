@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Réservation de {{ guestrooms[booking.guestroom_id -1].title }}</h1>
+    <ul class="list-group list-group-flush mt-5">
+        <li class="list-group-item">Chambre : {{ guestrooms[booking.guestroom_id -1].title }}</li>
+        <li class="list-group-item">Réservé par : {{ users[booking.user_id -1].lastname }}</li>
+        <li class="list-group-item">Date d'arrivée : {{ booking.arrival }}</li>
+        <li class="list-group-item">Date de départ : {{ booking.departure }}</li>
+        <li class="list-group-item">Nombre de personnes : {{ booking.num_of_persons }}</li>
+        <li class="list-group-item">Option taxi : {{ booking.taxi }}</li>
+        <li class="list-group-item">Restauration : {{ restorations[booking.restoration_id -1].name }}</li>
+        <li class="list-group-item">Prix de la chambre : {{ guestrooms[booking.guestroom_id -1].price }} €/nuit</li>
+
+        <li class="list-group-item list-group-item-secondary">Nombre de nuits : {{ daysBooking }}</li>
+        <li class="list-group-item list-group-item-secondary">Prix de la chambre : {{ guestrooms[booking.guestroom_id -1].price * daysBooking }} €</li>
+        <li class="list-group-item list-group-item-secondary">Prix restauration : </li>
+        <li class="list-group-item list-group-item-secondary">Total : </li>
+    </ul>
+    {% if booking.disabled == 0 or appUser['role'] == 1 %}
+    <a href="/booking/edit/{{ booking.id }}" class="btn btn-primary mt-5">Editer</a>
+    <a data-bs-toggle="modal" data-bs-target="#suppModal" class="btn btn-danger mt-5">Supprimer</a>
+    {% endif %}
+    <a href="/booking" class="btn btn-primary mt-5">Retour à la liste</a>
+    
+
+<div class="modal fade" id="suppModal" tabindex="-1" aria-labelledby="suppModalLabel" aria-hidden="true">  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer la réservation de {{ booking.firstname }} {{ booking.lastname }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sur de vouloir supprimer la réservation ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="/booking/delete/{{booking.id}}" class="btn btn-danger">Supprimer définitivement</a>
+      </div>
+    </div>
+  </div>    
+</div>
+
+{% endblock %}

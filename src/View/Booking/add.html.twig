@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Ajouter une réservation</h1>
+
+
+   <form method="post">
+    <input type="hidden" value="{{ booking.id }}" name="id">
+    
+    <div class="form-group mt-3">
+        <label for="user_id" class="form-label mt-2">Utilisateur : </label>
+        <select class="form-select" name="user_id" id="user_id" required>
+            <option value="">-- Choisissez un utilisateur --</option>
+            {% for user in users %}
+            <option value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group mt-3">
+        <label for="guestroom_id" class="form-label mt-2">Utilisateur : </label>
+        <select class="form-select" name="guestroom_id" id="guestroom_id" required>
+            <option value="">-- Choisissez une chambre --</option>
+            {% for guestroom in guestrooms %}
+            <option value="{{ guestroom.id }}">{{ guestroom.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group mt-3">
+        <label for="arrival" class="form-label mt-2">Date d'arrivée : </label>
+        <input type="date" class="form-control" name="arrival" id="arrival" required>
+    </div>
+    <div class="form-group mt-3">
+        <label for="departure" class="form-label mt-2">Date de départ : </label>
+        <input type="date" class="form-control" name="departure" id="departure" required>
+    </div>
+    <div class="form-group mt-3">
+        <label for="num_of_persons" class="form-label mt-2">Nombre de personnes : </label>
+        <input type="number" min="1" max="10" class="form-control" name="num_of_persons" id="num_of_persons" required>
+    </div>
+    <div class="row form-switch mx-0 mt-3">
+        <input type="checkbox" class="form-check-input" role="switch" name="taxi" id="taxi" >
+        <label for="taxi" class="form-check-label">Prévoir un taxi</label>
+    </div>
+    <div class="form-group mt-3">
+        <label for="restoration_id" class="form-label mt-2">Restoration : </label>
+        <select class="form-select" name="restoration_id" id="restoration_id" required>
+            <option value="">-- Choisissez une restoration --</option>
+            {% for restoration in restorations %}
+            <option value="{{ restoration.id }}">{{ restoration.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <input type="submit" class="btn btn-primary mt-3" value="Enregistrer">
+</form>
+<a href="/restoration" class="btn btn-primary mt-3">Retour à la liste</a></form>
+
+{% endblock %}

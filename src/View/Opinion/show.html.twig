@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>opinion {{ opinion.title }}</h1>
+     <ul class="list-group list-group-flush mt-5">
+        <li class="list-group-item">Titre : {{ opinion.title }}</li>
+        <li class="list-group-item">Description : {{ opinion.description }}</li>
+        <li class="list-group-item">Note : {{ opinion.user_id }}</li>
+        <li class="list-group-item">Note : {{ opinion.guestroom_id }}</li>
+    </ul>
+
+    <a href="/opinion/edit/{{ opinion.id }}" class="btn btn-primary mt-5">Editer</a>
+    <a href="/media/add/{{ opinion.id }}" class="btn btn-primary mt-5">Ajouter des photos</a>
+    <a data-bs-toggle="modal" data-bs-target="#suppModal" class="btn btn-danger mt-5">Supprimer</a>
+    <br>
+    <a href="/opinion" class="btn btn-primary mt-5">Retour à la liste</a>
+
+
+<div class="modal fade" id="suppModal" tabindex="-1" aria-labelledby="suppModalLabel" aria-hidden="true">  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer l'avis</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sur de vouloir supprimer l'avis ?
+        <br>Vous pouvez également la désactiver !
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="/opinion/delete/{{opinion.id}}" class="btn btn-danger">Supprimer définitivement</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,46 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Réservations de {{ appUser['firstname'] }}</h1>
+
+    <table class="table table-hover mt-5">
+        <thead>
+            <tr>    
+                <th>Validé</th>
+                <th>Chambre</th>
+                <th>Date d'arrivée</th>
+                <th>Date de départ</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+        <tr class="table">
+            <td>{{ booking.disabled ? '<i class="fas fa-check"></i>' : '•' }}</td>
+            <td>{{ guestrooms[booking.guestroom_id -1].title }}</td>
+            <td>{{ booking.arrival }}</td>
+            <td>{{ booking.departure }}</td>
+            <td>
+                <a href="/booking/show/{{ booking.id }}" class="btn btn-primary">Montrer</a>
+                {% if booking.disabled == 0 and appUser['role'] != 1 %}
+                    <a href="/booking/edit/{{ booking.id }}" class="btn btn-primary">Editer</a>
+                {% else %}
+                    <a href="/booking/edit/{{ booking.id }}" class="btn btn-primary disabled">Editer</a>
+                {% endif %}
+                
+                
+                
+            </td>
+        </tr>    
+        {% else %}
+        <tr>
+            <td>Rien à afficher</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

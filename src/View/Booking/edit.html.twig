@@ -1,0 +1,66 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+    <h1>Réservation de {{ appUser['firstname'] }}</h1>
+    <form method="post">
+    <input type="hidden" value="{{ booking.id }}" name="id">
+    {% if appUser['role'] == 1 %}
+    <div class="row form-switch mx-0 mt-3">
+        <input type="checkbox" class="form-check-input" role="switch" name="disabled" id="disabled" {% if booking.disabled == true %} checked {% endif %}>
+        <label for="disabled" class="form-check-label">Validé</label>
+    </div>
+    <div class="form-group mt-3">
+        <label for="user_id" class="form-label mt-2">Utilisateur : </label>
+        <select class="form-select" name="user_id" id="user_id" required>
+            <option value="">-- Choisissez un utilisateur --</option>
+            {% for user in users %}
+            <option value="{{ user.id }}" {% if booking.user_id == user.id %}selected{% endif %}>{{ user.firstname }} {{ user.lastname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group mt-3">
+        <label for="guestroom_id" class="form-label mt-2">Chambre : </label>
+        <select class="form-select" name="guestroom_id" id="guestroom_id" required>
+            <option value="">-- Choisissez une chambre --</option>
+            {% for guestroom in guestrooms %}
+            <option value="{{ guestroom.id }}" {% if booking.guestroom_id == guestroom.id %}selected{% endif %}>{{ guestroom.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% else %}
+    <input type="hidden" value="{{ booking.disabled }}" name="disabled">
+    <input type="hidden" value="{{ booking.user_id }}" name="user_id">
+    <input type="hidden" value="{{ booking.guestroom_id }}" name="guestroom_id">
+    {% endif %}
+
+    <div class="form-group mt-3">
+        <label for="arrival" class="form-label mt-2">Date d'arrivée : </label>
+        <input type="date" class="form-control" name="arrival" id="arrival" value="{{ booking.arrival }}" required>
+    </div>
+    <div class="form-group mt-3">
+        <label for="departure" class="form-label mt-2">Date de départ : </label>
+        <input type="date" class="form-control" name="departure" id="departure" value="{{ booking.departure }}" required>
+    </div>
+    <div class="form-group mt-3">
+        <label for="num_of_persons" class="form-label mt-2">Nombre de personnes : </label>
+        <input type="number" min="1" max="10" class="form-control" name="num_of_persons" id="num_of_persons" value="{{ booking.num_of_persons }}" required>
+    </div>
+    <div class="row form-switch mx-0 mt-3">
+        <input type="checkbox" class="form-check-input" role="switch" name="taxi" id="taxi" {% if booking.taxi == true %} checked {% endif %}>
+        <label for="taxi" class="form-check-label">Prévoir un taxi</label>
+    </div>
+    <div class="form-group mt-3">
+        <label for="restoration_id" class="form-label mt-2">Restoration : </label>
+        <select class="form-select" name="restoration_id" id="restoration_id" required>
+            <option value="">-- Choisissez une restoration --</option>
+            {% for restoration in restorations %}
+            <option value="{{ restoration.id }}" {% if booking.restoration_id == restoration.id %}selected{% endif %}>{{ restoration.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <input type="submit" class="btn btn-primary mt-3" value="Enregistrer">
+</form>
+<a href="/booking" class="btn btn-primary mt-3">Retour à la liste</a></form>
+{% endblock %}

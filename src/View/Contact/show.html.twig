@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Message de  {{ contact.name }}</h1>
+
+    <ul class="list-group list-group-flush mt-5">
+        <li class="list-group-item">Date : {{ contact.date }}</li>
+        <li class="list-group-item">Nom : {{ contact.name }}</li>
+        <li class="list-group-item">Email : {{ contact.email }}</li>
+        <li class="list-group-item">Sujet : {{ contact.subject }}</li>
+        <li class="list-group-item">Message : {{ contact.message }}</li>
+    </ul>
+
+    <br>
+    <a href="/contact" class="btn btn-primary mt-5">Retour à la liste des messages</a>
+{% endblock %}
