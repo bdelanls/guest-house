@@ -18,6 +18,15 @@
         <li class="list-group-item">Promotion : {{ guestroom.promotion }} %</li>
     </ul>
 
+    <div class="container row mt-3">
+      <h3>Photos</h3>
+        {% for photo in photos %}
+          <div class="col-2" style="height:95px; overflow:hidden;">
+            <img src="/assets/images/{{ photo.file }}" title="{{ photo.title }}">
+          </div>
+          {% endfor %}
+    </div>
+
     <a href="/guestroom/edit/{{ guestroom.id }}" class="btn btn-primary mt-5">Editer</a>
     <a href="/media/add/{{ guestroom.id }}" class="btn btn-primary mt-5">Ajouter des photos</a>
     <a data-bs-toggle="modal" data-bs-target="#suppModal" class="btn btn-danger mt-5">Supprimer</a>

@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Edit contact {{ contact.title }}</h1>
+    <form method="post">
+    <input type="hidden" value="{{ contact.id }}" name="id">
+    <input type="text" value="{{ contact.title }}" name="title">
+    <input type="submit" value="Update">
+</form>
+<br>
+    <a href="/contact/show/{{ contact.id }}">Back to list</a>
+{% endblock %}

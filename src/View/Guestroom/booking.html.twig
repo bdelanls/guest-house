@@ -1,0 +1,129 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    
+<div class="container">
+    <div class="guestroom-header row align-items-end" style="background-image:url('/assets/images/{{ media.file }}');">      
+        
+        <div class="col-3 g-0" style="height:100%">
+          <ul class="list-group list-group-flush justify-content-end"  style="height:100%">
+            <li class="list-group-item d-flex justify-content-between">Nombre de lit : <span>{{ guestroom.num_bed }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Lit supplémentaire : <span>{{ guestroom.add_bed }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Superficie : <span>{{ guestroom.area }} m<sup>2</sup></span></li>
+            <li class="list-group-item d-flex justify-content-between">Wifi : <span>{{ guestroom.wifi ? '<i class="fas fa-check"></i>' : '•' }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Télévision : <span>{{ guestroom.tv ? '<i class="fas fa-check"></i>' : '•' }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Climatisation : <span>{{ guestroom.clim ? '<i class="fas fa-check"></i>' : '•' }}</span></li>
+            <li class="list-group-item d-flex justify-content-between">Animaux acceptés : <span>{{ guestroom.pets ? '<i class="fas fa-check"></i>' : '•' }}</span></li>
+          </ul>
+        </div>
+        
+        <div class="col-9 gx-5">
+          <h1>{{ guestroom.title }}</h1>
+        </div>    
+    
+    </div>
+
+    
+    <div class="row align-items-start">
+      <div class="col-3 g-0">
+        <div class="cartouche">
+          <h4>{{ guestroom.price }}<span>€/nuit</span></h4>
+        </div>
+      </div>
+      <div class="col-9 gx-5 gy-3">
+
+        <!-- MESSAGE -->
+       {% if messageReservation is defined %} 
+          {% if messageReservation == 0 %}
+          <div class="alert alert-success" role="alert">
+      La réservation a été enregistrée, 
+      <br>vous serez contacté pour une confirmation dans les plus bref delais. <br>
+      <a href="/booking">Liste des réservations</a>
+    </div>
+            {% elseif messageReservation == 1 %}
+            <div class="alert alert-danger" role="alert">
+  Les dates choisies sont déjà réservées pour cette chambre, 
+  <br>choisissez d'autres dates ou une autre chambre. <br>Merci
+</div>
+            {% elseif messageReservation == 2 %}
+            <div class="alert alert-danger" role="alert">
+  Le voyage dans le temps est impossible <br>Désolé !
+</div>
+            {% endif %}
+        {% endif %}
+
+        <p class="description">{{ guestroom.description }}</p>
+        
+        <!-- MEDIAS -->
+        <div class="row p-3">
+          {% for photo in photos %}
+          <div class="col-4 g-0" style="height:130px; overflow:hidden;">
+            <img src="/assets/images/{{ photo.file }}" title="{{ photo.title }}">
+          </div>
+          {% endfor %}
+        </div>
+
+
+      <!-- RESERVATION -->
+      <div class="border-top pt-4 my-3">
+      <h3>Réservation</h3>
+
+      {% if appUser %}
+
+      <form class="row g-3" method="post">
+        <input type="hidden" value="{{ appUser.id }}" name="user_id">
+        <input type="hidden" value="{{ guestroom.id }}" name="guestroom_id">
+
+        <div class="col-md-6">
+            <label for="arrival" class="form-label mt-2">Date d'arrivée : </label>
+            <input type="date" class="form-control" name="arrival" id="arrival" required>
+        </div>
+        <div class="col-md-6">
+            <label for="departure" class="form-label mt-2">Date de départ : </label>
+            <input type="date" class="form-control" name="departure" id="departure" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="num_of_persons" class="form-label mt-2">Nombre de personnes : </label>
+            <input type="number" min="1" max="10" class="form-control" name="num_of_persons" id="num_of_persons" value="2" required>
+        </div>
+        <div class="col-md-6">
+            <label for="restoration_id" class="form-label mt-2">Restauration : </label>
+            <select class="form-select" name="restoration_id" id="restoration_id" required>
+                <option value="">-- Choisissez une restauration --</option>
+                {% for restoration in restorations %}
+                <option value="{{ restoration.id }}">{{ restoration.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="row form-switch mx-0 mt-3 col-12">
+            <input type="checkbox" class="form-check-input" role="switch" name="taxi" id="taxi" >
+            <label for="taxi" class="form-check-label">Prévoir un taxi</label>
+        </div>
+        
+        <div class="col-12">
+          <input type="submit" class="btn btn-primary mt-3" value="Enregistrer">
+        </div>
+      </form>
+
+      {% else %}
+
+      <p>Vous devez vous <a href="/user/login">loguer</a> ou vous <a href="/user/add">enregistrer</a> avant de réserver la chambre</p>
+
+      {% endif %}
+      </div>
+
+
+      </div>
+    </div>
+
+
+
+
+</div>
+    
+
+
+{% endblock %}
+

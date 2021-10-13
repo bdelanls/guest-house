@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Restaurations</h1>
+
+    <table class="table table-hover mt-5">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Nom</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for restoration in restorations %}
+        <tr class="table">
+            <td>{{ restoration.id }}</td>
+            <td>{{ restoration.name }}</td>
+            <td>
+                <a href="/restoration/show/{{ restoration.id }}" class="btn btn-primary">Montrer</a>
+                <a href="/restoration/edit/{{ restoration.id }}" class="btn btn-warning">Editer</a>
+            </td>
+        </tr>    
+        {% else %}
+        <tr>
+            <td>Rien à afficher</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<a href="/restoration/add" class="btn btn-primary">Ajouter une restauration</a>
+
+
+
+{% endblock %}

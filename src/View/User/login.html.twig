@@ -6,7 +6,8 @@
     
     {% if connect %}
     <div class="alert alert-success" role="alert">
-        Bienvenue {{log.firstname}} {{log.lastname}} 
+        Bienvenue {{log.firstname}} {{log.lastname}} <br>
+        <a href="/" class="btn btn-success">Accueil</a>
     </div>
     {% elseif connect == false %}
     <div class="alert alert-danger" role="alert">

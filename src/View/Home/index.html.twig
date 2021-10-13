@@ -3,11 +3,48 @@
 {% block content %}
 
 
+<div class="img-intro d_flex align-items-center">
+    <div class="overlay bg-parallax" ></div>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="text-light fw-bolder display-3">Maison d'hôtes</h1>
+            <p class="fw-bold text-light">Lorem ipsum, dolor sit amet consectetur adipisicing elit. <br>Iusto voluptatum alias tempore maiores ea dignissimos qui architecto ex quia hic. <br>Error voluptatem totam magnam voluptates non. Commodi doloremque cum omnis?</p>
+            <a href="#guestroom-list" class="btn btn-warning text-light text-uppercase mt-5">Les chambres d'hôtes</a>
+        </div>
+    </div>
+</div>
+
+<div class="my-3">
+    <p class="fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum perspiciatis possimus totam reiciendis, laborum sequi
+quae laudantium magni modi architecto necessitatibus cupiditate est ipsum commodi minus deleniti quod maiores
+temporibus.</p>
+<p>Velit laboriosam distinctio quaerat repudiandae. Quod, tempore totam porro fugit velit harum. Voluptates dolores tempora
+rerum impedit aliquam explicabo quisquam eligendi in porro, reiciendis saepe pariatur. Vitae velit quibusdam ipsum.
+Aut praesentium nesciunt repellendus quam ipsam optio reprehenderit consectetur corporis asperiores, cupiditate sint
+soluta quis eveniet ex consequuntur molestiae dicta vitae nostrum ratione corrupti beatae? Pariatur optio quam
+perspiciatis quisquam.</p>
+</div>
+
+<div class="row my-5 list-guestroom" id="guestroom-list">
+
+    {% for guestroom in guestrooms %}
+    <div class="col-lg-4">
+        <div class="text-center">
+            <div class="img_guestroom">
+                <img src="assets/images/{{ guestroom.file }}" alt="">
+                <a href="guestroom/booking/{{ guestroom.id }}" class="btn btn-warning fw-bold text-light text-uppercase">Réserver</a>
+            </div>
+            <a href="guestroom/booking/{{ guestroom.id }}"><h4>{{ guestroom.title }}</h4></a>
+            <h5>{{ guestroom.price }}€<small>/nuit</small></h5>
+        </div>
+    </div>
+    {% endfor %}
+    
+    
+</div>
 
 
-    <h1>Accueil</h1>
-
-
-
-   
 {% endblock %}
+
+
+

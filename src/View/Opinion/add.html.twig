@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Ajouter un avis</h1>
+    <form method="post">
+    <input type="hidden" value="{{ opinion.id }}" name="id">
+    
+    <div class="row mb-3">
+        <label class="form-label" for="precisions">Message :</label><br />
+		<textarea class="form-control"  name="comment" id="comment"></textarea>  
+    </div>
+<fieldset class="row mb-3">
+        <div class="row mb-3">
+            <label for="price" class="col-sm-2 col-form-label">Note chambre</label>
+            <div class="col-sm-10">
+                <input type="number" min="0" max="5" class="form-control" name="note" id="notebedroom" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label for="promotion" class="col-sm-2 col-form-label">Note service</label>
+            <div class="col-sm-10">
+                <input type="number" min="0" max="5" class="form-control" name="note" id="noteservice">
+            </div>
+        </div>
+
+    </fieldset>
+
+    
+    
+    <input type="submit" class="btn btn-primary mt-3" value="Enregistrer">
+    </form>
+<a href="/opinion" class="btn btn-primary mt-3">Retour à la liste</a>
+{% endblock %}

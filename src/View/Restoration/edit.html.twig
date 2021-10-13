@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Restauration {{ restoration.name }}</h1>
+
+    <form method="post">
+    <input type="hidden" value="{{ restoration.id }}" name="id">
+
+    <div class="form-group mt-3">
+        <label for="name" class="form-label mt-2">Nom : </label>
+        <input type="text" class="form-control" name="name" id="name" value="{{ restoration.name }}" required>
+    </div>
+
+
+   <input type="submit" class="btn btn-primary mt-5" value="Mettre à jour">
+</form>
+<br>
+
+<a href="/restoration" class="btn btn-primary mt-3">Retour  la liste</a>
+
+
+
+
+
+{% endblock %}

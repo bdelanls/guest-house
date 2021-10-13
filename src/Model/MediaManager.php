@@ -93,4 +93,35 @@ class MediaManager extends AbstractManager
         $sql = "SELECT g.id, g.title FROM `guestroom` g";
         return $this->pdo->query($sql)->fetchAll();
     }
+
+    public function selectAllHome(): array
+    {
+        $sql = "SELECT * FROM " . $this->table . "
+        WHERE featured='1' ";
+        return $this->pdo->query($sql)->fetchAll();
+    }
+
+    public function selectOneByGuestroom(int $id)
+    {
+        // prepared request
+        $sql = "SELECT * FROM $this->table WHERE guestroom_id=:id AND featured='1' ";
+
+        
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
+
+    public function selectAllPhoto(int $id): array
+    {
+        $sql = "SELECT * FROM $this->table WHERE guestroom_id=:id" ;
+
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
 }

@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Restauration {{ restoration.name }}</h1>
+
+    <ul class="list-group list-group-flush mt-5">
+        <li class="list-group-item">Nom : {{ restoration.name }}</li>
+    </ul>
+
+    <a href="/restoration/edit/{{ restoration.id }}" class="btn btn-primary mt-5">Editer</a>
+    <a data-bs-toggle="modal" data-bs-target="#suppModal" class="btn btn-danger mt-5">Supprimer</a>
+    <br>
+    <a href="/restoration" class="btn btn-primary mt-3">Retour  la liste</a>
+
+    <div class="modal fade" id="suppModal" tabindex="-1" aria-labelledby="suppModalLabel" aria-hidden="true">  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Supprimer {{ restoration.name }} </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Êtes-vous sur de vouloir supprimer la restauration ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <a href="/restoration/delete/{{restoration.id}}" class="btn btn-danger">Supprimer définitivement</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

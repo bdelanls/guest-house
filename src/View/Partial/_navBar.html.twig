@@ -18,12 +18,12 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             {% for appGuestroom in appGuestrooms %}
-            <li><a class="dropdown-item" href="/guestroom/show/{{ appGuestroom.id }}">{{ appGuestroom.title }}</a></li>
+            <li><a class="dropdown-item" href="/guestroom/booking/{{ appGuestroom.id }}">{{ appGuestroom.title }}</a></li>
             {% endfor %}
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">contact</a>
+          <a class="nav-link" href="/contact/add">contact</a>
         </li>
       </ul>
       <div class="d-flex">
@@ -35,10 +35,12 @@
           <a class="nav-link dropdown-toggle" id="navbarCompte" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user"></i></a>
             <ul class="dropdown-menu" aria-labelledby="navbarCompte">
               <li><a class="dropdown-item" href="/user/show/{{ appUser.id }}">Mon compte</a></li>
-              <li><a class="dropdown-item" href="/user">Liste des utilisateurs</a></li>
-              <li><a class="dropdown-item" href="/guestroom">Liste des chambres</a></li>
-              <li><a class="dropdown-item" href="/media">Liste des photos</a></li>
-              <li><a class="dropdown-item" href="/">Liste des réservations</a></li>
+              <li><a class="dropdown-item" href="/user">Les utilisateurs</a></li>
+              <li><a class="dropdown-item" href="/guestroom">Les chambres</a></li>
+              <li><a class="dropdown-item" href="/media">Les photos</a></li>
+              <li><a class="dropdown-item" href="/booking">Les réservations</a></li>
+              <li><a class="dropdown-item" href="/restoration">La restauration</a></li>
+              <li><a class="dropdown-item" href="/contact">Les contacts</a></li>
             </ul>
           </li>
       </ul>
@@ -48,7 +50,7 @@
           <a class="nav-link dropdown-toggle" id="navbarCompte" role="button" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user"></i></a>
             <ul class="dropdown-menu" aria-labelledby="navbarCompte">
               <li><a class="dropdown-item" href="/user/show/{{ appUser.id }}">Mon compte</a></li>
-              <li><a class="dropdown-item" href="#">Mes réservations</a></li>
+              <li><a class="dropdown-item" href="/booking">Mes réservations</a></li>
             </ul>
           </li>
       </ul>
